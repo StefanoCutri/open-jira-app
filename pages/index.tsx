@@ -1,7 +1,12 @@
-import Head from 'next/head'
+import { Layout } from "@/components/layout";
+import { Typography } from "@mui/material";
 
 export default function HomePage() {
   return (
-    <h1>Hello world</h1>
-  )
+    <Layout title="Home Page">
+      <Typography color="primary" variant="h1">
+        Open Jira App
+      </Typography>
+    </Layout>
+  );
 }
