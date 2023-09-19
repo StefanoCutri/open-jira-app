@@ -1,5 +1,5 @@
 import { Layout } from "@/components/layout";
-import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 
 export default function HomePage() {
   return (
