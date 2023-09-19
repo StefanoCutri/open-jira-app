@@ -1,7 +1,7 @@
-import { createContext } from "react";
+import { createContext } from "vm";
 
 interface ContextProps {
-    sideMenuOpen: boolean
+    contextProperty: boolean
 }
 
 export const UIContext = createContext({} as ContextProps)
