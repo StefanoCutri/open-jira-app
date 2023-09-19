@@ -24,6 +24,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@mui/icons-material": "^5.14.9"
+    "@mui/icons-material": "^5.14.9",
+    "@types/uuid": "^9.0.4"
   }
 }

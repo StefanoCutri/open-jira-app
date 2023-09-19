@@ -1,4 +1,6 @@
 import React, { FC, useReducer } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { EntriesContext, entriesReducer } from "./";
 import { Entry } from "@/interfaces";
 
