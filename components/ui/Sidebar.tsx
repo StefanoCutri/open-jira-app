@@ -15,12 +15,12 @@ import { UIContext } from '@/context/ui';
 
 export const Sidebar = () => {
 
-  const {sideMenuOpen} = useContext(UIContext)
+  const {sideMenuOpen, closeSideMenu} = useContext(UIContext)
 
   const menuItems: string[] = ["Inbox", "Starred", "Send email", "Drafts"];
 
   return (
-    <Drawer anchor="left" open={sideMenuOpen} onClose={() => console.log("cosing")}>
+    <Drawer anchor="left" open={sideMenuOpen} onClose={closeSideMenu}>
       <Box sx={{ width: 250 }}>
         <Box sx={{ padding: "5px 10px" }}>
           <Typography variant="h4">Menu</Typography>
