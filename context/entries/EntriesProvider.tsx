@@ -1,12 +1,12 @@
 import React, { FC, useReducer } from "react";
-import { EntriesContext, EntriesReducer } from "./";
+import { EntriesContext, entriesReducer } from "./";
 
 export interface EntriesState {
-  property: boolean;
+  entries: [];
 }
 
 const Entries_INITIAL_STATE: EntriesState = {
-  property: false,
+    entries: []
 };
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const EntriesProvider: FC<Props> = ({ children }) => {
-  const [state, dispatch] = useReducer(EntriesReducer, Entries_INITIAL_STATE);
+  const [state, dispatch] = useReducer(entriesReducer, Entries_INITIAL_STATE);
 
   return (
     <EntriesContext.Provider
