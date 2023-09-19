@@ -1,12 +1,29 @@
 import { Layout } from "@/components/layout";
-import { Typography } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, Typography } from "@mui/material";
 
 export default function HomePage() {
   return (
-    <Layout title="Home Page">
-      <Typography color="primary" variant="h1">
-        Open Jira App
-      </Typography>
+    <Layout title="Home - OpenJira">
+      <Grid container spacing={2}>
+        <Grid item xs={2} sm={4}>
+          <Card sx={{ height: "calc(100vh - 100px)" }}>
+            <CardHeader title="Pending" />
+            <CardContent></CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={2} sm={4}>
+          <Card sx={{ height: "calc(100vh - 100px)" }}>
+            <CardHeader title="In Progress" />
+            <CardContent></CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={2} sm={4}>
+          <Card sx={{ height: "calc(100vh - 100px)" }}>
+            <CardHeader title="Completed" />
+            <CardContent></CardContent>
+          </Card>
+        </Grid>
+      </Grid>
     </Layout>
   );
 }
