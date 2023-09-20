@@ -1,4 +1,5 @@
 import { List, Paper } from "@mui/material";
+import { EntryCard } from "..";
 
 export const EntryList = () => {
   return (
@@ -16,7 +17,9 @@ export const EntryList = () => {
           sx={{
             opacity: 1,
           }}
-        ></List>
+        >
+          <EntryCard />
+        </List>
       </Paper>
     </div>
   );
