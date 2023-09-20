@@ -1,7 +1,19 @@
 import { List, Paper } from "@mui/material";
 import { EntryCard } from "..";
 
-export const EntryList = () => {
+import { EntryStatus } from "@/interfaces";
+import { useContext, useMemo } from "react";
+import { EntriesContext } from "@/context/entries";
+
+interface Props {
+    status: EntryStatus
+}
+
+export const EntryList = ({status}: Props) => {
+    const {entries} = useContext(EntriesContext)
+    const entriesByStatus = useMemo(()=> entries.filter(entry => entry.status === status), [])
+    console.log(entriesByStatus);
+    
   return (
     // Drop
     <div>
@@ -11,6 +23,7 @@ export const EntryList = () => {
           overflow: "scroll",
           backgroundColor: "transparent",
           "&::-webkit-scrollbar": { display: "none" },
+          padding: 1 
         }}
       >
         <List
@@ -18,7 +31,11 @@ export const EntryList = () => {
             opacity: 1,
           }}
         >
-          <EntryCard />
+          {
+            entriesByStatus.map(entrie => (
+                <EntryCard key={entrie._id} entry={entrie}/>
+            ))
+          }
         </List>
       </Paper>
     </div>
