@@ -46,6 +46,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
       description,
       status: "pending",
     };
+    
     dispatch({ type: "[Entry] Add-Entry", payload: NewEntry });
   };
 

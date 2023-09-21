@@ -13,7 +13,7 @@ export const EntryList = ({ status }: Props) => {
   const { entries } = useContext(EntriesContext);
   const entriesByStatus = useMemo(
     () => entries.filter((entry) => entry.status === status),
-    []
+    [entries]
   );
 
   return (
