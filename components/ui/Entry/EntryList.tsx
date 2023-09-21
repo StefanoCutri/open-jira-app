@@ -6,14 +6,16 @@ import { useContext, useMemo } from "react";
 import { EntriesContext } from "@/context/entries";
 
 interface Props {
-    status: EntryStatus
+  status: EntryStatus;
 }
 
-export const EntryList = ({status}: Props) => {
-    const {entries} = useContext(EntriesContext)
-    const entriesByStatus = useMemo(()=> entries.filter(entry => entry.status === status), [])
-    console.log(entriesByStatus);
-    
+export const EntryList = ({ status }: Props) => {
+  const { entries } = useContext(EntriesContext);
+  const entriesByStatus = useMemo(
+    () => entries.filter((entry) => entry.status === status),
+    []
+  );
+
   return (
     // Drop
     <div>
@@ -23,7 +25,7 @@ export const EntryList = ({status}: Props) => {
           overflow: "scroll",
           backgroundColor: "transparent",
           "&::-webkit-scrollbar": { display: "none" },
-          padding: 1 
+          padding: 1,
         }}
       >
         <List
@@ -31,11 +33,9 @@ export const EntryList = ({status}: Props) => {
             opacity: 1,
           }}
         >
-          {
-            entriesByStatus.map(entrie => (
-                <EntryCard key={entrie._id} entry={entrie}/>
-            ))
-          }
+          {entriesByStatus.map((entrie) => (
+            <EntryCard key={entrie._id} entry={entrie} />
+          ))}
         </List>
       </Paper>
     </div>

@@ -1,4 +1,4 @@
-import { Entry, EntryStatus } from "@/interfaces";
+import { Entry } from "@/interfaces";
 import {
   Card,
   CardActionArea,
