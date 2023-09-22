@@ -4,6 +4,7 @@ interface ContextProps {
     sideMenuOpen: boolean;
     openSideMenu: () => void;
     closeSideMenu: () => void;
+    setIsAddingEntry: (isAdding: boolean) => void
     
 }
 

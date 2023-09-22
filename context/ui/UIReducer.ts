@@ -3,6 +3,7 @@ import { UIState } from ".";
 type UIActions = 
 | {type: 'UI - Open Sidebar'}
 | {type: 'UI - Close Sidebar'}
+| {type: 'UI - Adding Entry', payload: boolean}
 
 export const UIReducer = (state: UIState, action: UIActions): UIState => {
     switch (action.type) {
@@ -15,6 +16,11 @@ export const UIReducer = (state: UIState, action: UIActions): UIState => {
             return{
                 ...state,
                 sideMenuOpen: false
+            }
+        case 'UI - Adding Entry':
+            return{
+                ...state,
+                isAddingEntry: action.payload
             }
         default:
             return state;
