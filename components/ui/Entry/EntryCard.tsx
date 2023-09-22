@@ -1,3 +1,4 @@
+import { DragEvent } from "react";
 import { Entry } from "@/interfaces";
 import {
   Card,
@@ -6,15 +7,23 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+
 interface Props {
   entry: Entry;
 }
+
 export const EntryCard = ({ entry }: Props) => {
+  const onDragStart = (event: DragEvent) => {
+    event.dataTransfer.setData("text", entry._id);
+  };
+
   return (
     <Card
       sx={{
         marginBottom: 1,
       }}
+      draggable={true}
+      onDragStart={onDragStart}
     >
       <CardActionArea>
         <CardContent>
