@@ -17,6 +17,10 @@ export const EntryCard = ({ entry }: Props) => {
     event.dataTransfer.setData("text", entry._id);
   };
 
+  const onDragEnd = () => {
+    // Cancel drag
+  }
+
   return (
     <Card
       sx={{
@@ -24,6 +28,7 @@ export const EntryCard = ({ entry }: Props) => {
       }}
       draggable={true}
       onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
     >
       <CardActionArea>
         <CardContent>
