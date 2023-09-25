@@ -4,8 +4,13 @@ interface ContextProps {
     sideMenuOpen: boolean;
     openSideMenu: () => void;
     closeSideMenu: () => void;
+
     setIsAddingEntry: (isAdding: boolean) => void;
     isAddingEntry: boolean;
+
+    isDragging: boolean;
+    setOnDragStart: () => void
+    setOnDragEnd: () => void
     
 }
 
