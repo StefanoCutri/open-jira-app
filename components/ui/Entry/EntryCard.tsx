@@ -1,4 +1,4 @@
-import { DragEvent } from "react";
+import { DragEvent, useContext } from "react";
 import { Entry } from "@/interfaces";
 import {
   Card,
@@ -7,19 +7,23 @@ import {
   CardContent,
   Typography,
 } from "@mui/material";
+import { UIContext } from "@/context/ui";
 
 interface Props {
   entry: Entry;
 }
 
 export const EntryCard = ({ entry }: Props) => {
+  const { setOnDragEnd, setOnDragStart} = useContext(UIContext);
+
   const onDragStart = (event: DragEvent) => {
     event.dataTransfer.setData("text", entry._id);
+    setOnDragStart()
   };
 
   const onDragEnd = () => {
-    // Cancel drag
-  }
+    setOnDragEnd();
+  };
 
   return (
     <Card
