@@ -17,12 +17,11 @@ export const EntryList = ({ status }: Props) => {
   );
 
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
-
-  const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     const id = event.dataTransfer.getData("text");
-    console.log({ id });
+  };
+  
+  const allowDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
   };
 
   return (
