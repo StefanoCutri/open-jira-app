@@ -6,13 +6,22 @@ To run locally, you need the data base
 docker-compose up -d
 ```
 
-* -d, means __detached__
+- -d, means **detached**
 
-* MongoDB local URL:
+- MongoDB local URL:
+
 ```
 mongodb://localhost:27017/entriesdb
 ```
 
 ## Configure environment variables
 
-Rename __.env.template__ to __.env__
+Rename **.env.template** to **.env**
+
+# Fill database with test information
+
+Call:
+
+```
+http://localhost:3000/api/seed
+```
