@@ -4,7 +4,7 @@ const mongoConnection = {
   isConnected: 0,
 };
 
-export const connect = async () => {
+export const connect = async() => {
   if (mongoConnection.isConnected) {
     console.log("Already connected");
     return;
@@ -26,7 +26,7 @@ export const connect = async () => {
   console.log("Conected to monogDb", process.env.MONGO_URL);
 };
 
-export const disconnect = async () => {
+export const disconnect = async() => {
   if (process.env.NODE_ENV === "development") return;
   if (mongoConnection.isConnected === 0) return;
   await mongoose.disconnect();
