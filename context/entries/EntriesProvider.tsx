@@ -38,6 +38,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
 
   const refreshEntries = async () => {
     const { data } = await entriesApi.get<Entry[]>("/entries");
+    dispatch({type: '[Entry] Refresh-Entries', payload: data})
   };
 
   useEffect(() => {
