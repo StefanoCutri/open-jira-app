@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { EntriesContext, entriesReducer } from "./";
 import { Entry } from "@/interfaces";
-import { NewEntry } from "../../components/ui/NewEntry";
 import { entriesApi } from "@/apis";
 
 export interface EntriesState {
@@ -35,7 +34,7 @@ export const EntriesProvider: FC<Props> = ({ children }) => {
   const updateEntry = (entry: Entry) => {
     dispatch({ type: "[Entry] Update-Entry", payload: entry });
   };
-
+                                                                                                                                                                                                                                                                                                                                                                                          
   const refreshEntries = async() => {
     const { data } = await entriesApi.get<Entry[]>("/entries");
     dispatch({type: '[Entry] Refresh-Entries', payload: data})
