@@ -11,12 +11,14 @@ export default function handler(
   switch (req.method) {
     case "GET":
       return getEntries(res);
+    case "POST":
+      return postEntry(req, res);
     default:
       return res.status(400).json({ message: "Endpoint doesnt exists" });
   }
 }
 
-const postEntry = async (res: NextApiResponse<Data>, req: NextApiRequest) => {
+const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   const { description = "" } = req.body;
 
   const newEntry = new Entry({
@@ -31,6 +33,8 @@ const postEntry = async (res: NextApiResponse<Data>, req: NextApiRequest) => {
 
     return res.status(201).json(newEntry);
   } catch (error) {
+    await db.disconnect();
+
     return res.status(500).json({
       message: "Something went wrong :(",
     });
