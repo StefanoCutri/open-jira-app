@@ -11,15 +11,21 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { id } = req.query;
 
+  
+  const { id } = req.query;
+  
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).json({ message: "Id not valid" });
   }
-
+  
+  console.log(req.method);
   switch (req.method) {
     case "PUT":
       return updateEntry(req, res);
+
+    case "GET":
+      return getEntry(req, res);
     default:
       return res.status(400).json({ message: "Method not valid" });
   }
@@ -53,8 +59,24 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     await db.disconnect();
     res.status(200).json(updatedEntry!);
   } catch (error: any) {
-    
     await db.disconnect();
     res.status(400).json({ message: error.errors.status.message });
   }
+};
+
+const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+  const { id } = req.query;
+  await db.connect();
+
+  const entry = await Entry.findById(id);
+
+  if (!entry) {
+    await db.disconnect();
+    return res.status(400).json({
+      message: "No entry with that id " + id,
+    });
+  }
+
+  res.status(200).json(entry);
+  await db.disconnect();
 };
