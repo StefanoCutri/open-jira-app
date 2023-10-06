@@ -19,7 +19,6 @@ export default async function handler(
     return res.status(400).json({ message: "Id not valid" });
   }
   
-  console.log(req.method);
   switch (req.method) {
     case "PUT":
       return updateEntry(req, res);
