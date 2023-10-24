@@ -1,4 +1,5 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useMemo, useState } from "react";
+import { GetServerSideProps } from "next";
 import {
   capitalize,
   Button,
@@ -20,6 +21,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 
 import { Layout } from "@/components/layout";
 import { EntryStatus } from "@/interfaces";
+import { isValidObjectId } from "mongoose";
 
 const validStatus: EntryStatus[] = ["pending", "in-progress", "finished"];
 
@@ -27,6 +29,10 @@ const EntryPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [status, setStatus] = useState<EntryStatus>("pending");
   const [touched, setTouched] = useState(false);
+  const isNotValid = useMemo(
+    () => inputValue.length <= 0 && touched,
+    [inputValue, touched]
+  );
 
   const onTextInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -53,6 +59,9 @@ const EntryPage = () => {
                 label="New Entry"
                 value={inputValue}
                 onChange={onTextInputChange}
+                onBlur={() => setTouched(true)}
+                helperText={isNotValid && "Enter a value"}
+                error={isNotValid}
               />
               <FormControl>
                 <FormLabel>Status:</FormLabel>
@@ -74,6 +83,7 @@ const EntryPage = () => {
                 startIcon={<SaveAltOutlined />}
                 variant="contained"
                 fullWidth
+                disabled={inputValue.length <= 0}
               >
                 Save
               </Button>
@@ -93,6 +103,28 @@ const EntryPage = () => {
       </IconButton>
     </Layout>
   );
+};
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const { id } = params as { id: string };
+
+  if (!isValidObjectId(id)) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      id,
+    },
+  };
 };
 
 export default EntryPage;
