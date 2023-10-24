@@ -8,25 +8,32 @@ import {
   Typography,
 } from "@mui/material";
 import { UIContext } from "@/context/ui";
+import { useRouter } from "next/router";
 
 interface Props {
   entry: Entry;
 }
 
 export const EntryCard = ({ entry }: Props) => {
-  const { setOnDragEnd, setOnDragStart} = useContext(UIContext);
+  const { setOnDragEnd, setOnDragStart } = useContext(UIContext);
 
   const onDragStart = (event: DragEvent) => {
     event.dataTransfer.setData("text", entry._id);
-    setOnDragStart()
+    setOnDragStart();
   };
 
   const onDragEnd = () => {
     setOnDragEnd();
   };
 
+  const onClick = () => {
+    const router = useRouter();
+    router.push(`/entries/${entry._id}`);
+  };
+
   return (
     <Card
+      onClick={onClick}
       sx={{
         marginBottom: 1,
       }}
