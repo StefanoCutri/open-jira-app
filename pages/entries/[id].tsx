@@ -23,6 +23,7 @@ import { Layout } from "@/components/layout";
 import { Entry, EntryStatus } from "@/interfaces";
 import { getEntryById } from "@/database/dbEntries";
 import { EntriesContext } from "@/context/entries";
+import { getDateFormatFromNow } from '../../utils/dateFunctions';
 
 const validStatus: EntryStatus[] = ["pending", "in-progress", "finished"];
 
@@ -65,7 +66,7 @@ const EntryPage = ({ entry }: Props) => {
           <Card>
             <CardHeader
               title={`Entry: ${inputValue}`}
-              subheader={`Created ${entry.createdAt} mins ago`}
+              subheader={`Created ${getDateFormatFromNow(entry.createdAt)}`}
             />
             <CardContent>
               <TextField

@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { UIContext } from "@/context/ui";
 import { useRouter } from "next/router";
+import { getDateFormatFromNow } from "@/utils/dateFunctions";
 
 interface Props {
   entry: Entry;
@@ -54,7 +55,7 @@ export const EntryCard = ({ entry }: Props) => {
             paddingRight: 2,
           }}
         >
-          <Typography variant="body2">30 min ago</Typography>
+          <Typography variant="body2">{getDateFormatFromNow(entry.createdAt)}</Typography>
         </CardActions>
       </CardActionArea>
     </Card>
