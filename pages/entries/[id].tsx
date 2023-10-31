@@ -56,7 +56,7 @@ const EntryPage = ({ entry }: Props) => {
       description: inputValue,
     };
 
-    updateEntry(updatedEntry);
+    updateEntry(updatedEntry, true);
   };
   return (
     <Layout title={inputValue.substring(0, 20) + "..."}>
