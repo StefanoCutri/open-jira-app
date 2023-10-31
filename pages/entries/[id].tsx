@@ -31,8 +31,8 @@ interface Props {
 const EntryPage = ({ entry }: Props) => {
   console.log(entry);
 
-  const [inputValue, setInputValue] = useState("");
-  const [status, setStatus] = useState<EntryStatus>("pending");
+  const [inputValue, setInputValue] = useState(entry.description);
+  const [status, setStatus] = useState<EntryStatus>(entry.status);
   const [touched, setTouched] = useState(false);
   const isNotValid = useMemo(
     () => inputValue.length <= 0 && touched,
@@ -46,13 +46,13 @@ const EntryPage = ({ entry }: Props) => {
     setStatus(event.target.value as EntryStatus);
   };
   return (
-    <Layout title="... ... ...">
+    <Layout title={inputValue.substring(0, 20) + '...'}>
       <Grid container justifyContent="center" sx={{ marginTop: 2 }}>
         <Grid item xs={12} sm={8} md={6}>
           <Card>
             <CardHeader
               title={`Entry: ${inputValue}`}
-              subheader={`Created ...mins ago`}
+              subheader={`Created ${entry.createdAt} mins ago`}
             />
             <CardContent>
               <TextField
