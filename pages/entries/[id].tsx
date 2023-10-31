@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useMemo, useState } from "react";
+import React, { ChangeEvent, useContext, useMemo, useState } from "react";
 import { GetServerSideProps } from "next";
 import {
   capitalize,
@@ -22,6 +22,7 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { Layout } from "@/components/layout";
 import { Entry, EntryStatus } from "@/interfaces";
 import { getEntryById } from "@/database/dbEntries";
+import { EntriesContext } from "@/context/entries";
 
 const validStatus: EntryStatus[] = ["pending", "in-progress", "finished"];
 
@@ -29,7 +30,7 @@ interface Props {
   entry: Entry;
 }
 const EntryPage = ({ entry }: Props) => {
-  console.log(entry);
+  const { updateEntry } = useContext(EntriesContext);
 
   const [inputValue, setInputValue] = useState(entry.description);
   const [status, setStatus] = useState<EntryStatus>(entry.status);
@@ -45,8 +46,20 @@ const EntryPage = ({ entry }: Props) => {
   const onStatusChange = (event: ChangeEvent<HTMLInputElement>) => {
     setStatus(event.target.value as EntryStatus);
   };
+
+  const onSave = () => {
+    if (inputValue.trim().length === 0) return;
+
+    const updatedEntry: Entry = {
+      ...entry,
+      status,
+      description: inputValue,
+    };
+
+    updateEntry(updatedEntry);
+  };
   return (
-    <Layout title={inputValue.substring(0, 20) + '...'}>
+    <Layout title={inputValue.substring(0, 20) + "..."}>
       <Grid container justifyContent="center" sx={{ marginTop: 2 }}>
         <Grid item xs={12} sm={8} md={6}>
           <Card>
@@ -89,6 +102,7 @@ const EntryPage = ({ entry }: Props) => {
                 variant="contained"
                 fullWidth
                 disabled={inputValue.length <= 0}
+                onClick={onSave}
               >
                 Save
               </Button>
